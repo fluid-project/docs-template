@@ -1,0 +1,68 @@
+/* Apply the colours that are related to a particular category.
+theCategory - the active category. */
+applyActiveCategoryColours(theCategory) {
+     .docs-template-topics,
+     .title-bar {
+         background-color: categoryColours[theCategory];
+     }
+
+     .docs-template-contentArea {
+         border-top: 0.3rem solid darken(categoryColours[theCategory],40);
+     }
+
+     .title-bar {
+         border-bottom: 0.3rem solid darken(categoryColours[theCategory],40);
+     }
+
+     header, footer {
+         background-color: lighten(categoryColours[theCategory],7);
+     }
+}
+
+
+/* Generate the contrast theme styles for docs-template.
+foregroundColour - the foreground colour of the contrast theme.
+backgroundColour - the background colour of the contrast theme.*/
+contrastTheme(foregroundColour, backgroundColour) {
+    a:hover, a:hover code, a:hover .docs-template-topics-item {
+        background-color: foregroundColour !important;
+        color: backgroundColour !important;
+    }
+
+    a, a:hover {
+        transition: none;
+    }
+
+    a:focus {
+        outline: 0.2rem solid foregroundColour !important;
+    }
+
+    .fl-inverted-color {
+        a:hover, a:hover *, nav li span {
+             background: backgroundColour !important;
+             color: foregroundColour !important;
+         }
+
+         nav li a {
+            border-bottom: none;
+            &:hover {
+                border: none;
+            }
+        }
+    }
+
+    figure a:hover {
+        outline: none !important;
+        img {
+            background-color: foregroundColour !important;
+        }
+    }
+
+    .docs-template-topics-button:before {
+        color: foregroundColour !important;
+    }
+
+    .docs-template-contentArea {
+        border-top-color: backgroundColour !important;
+    }
+}

@@ -15,8 +15,9 @@ var githubDocRoot = "https://github.com/fluid-project/docs-template/blob/master/
 
 var path = require("path");
 var fs = require("fs");
-var docsCore = require("docs-core");
+var docsHelpers = require("./helpers-docpad/helpers-docpad.js");
 var siteStructure = JSON.parse(fs.readFileSync("site-structure.json"));
+var messages = JSON.parse(fs.readFileSync(path.join("src","static","messages","messages.json")));
 
 // We locate the images within the src/documents directory so that images can
 // be viewed on GitHub, as well as in the DocPad output. We need to
@@ -24,27 +25,41 @@ var siteStructure = JSON.parse(fs.readFileSync("site-structure.json"));
 // processed. We tell DocPad to ignore the images using "ignorePaths" and we
 // then copy them ourselves with a "writeAfter" event handler.
 var rootPath = process.cwd();
-var imagesSrcDir = path.join(rootPath, "src", "documents", "images");
-var imagesDestDir = "out/images";
+var docsHelpersPath = path.join (rootPath, "helpers-docpad");
+var partialsDir = path.join ("src", "layouts", "partials");
+
+// var imagesSrcDir = path.join(rootPath, "src", "documents", "images");
+// var imagesDestDir = path.join ("out", "images");
 
 module.exports = {
     rootPath: rootPath,
     filesPaths: [
-        docsCore.getStaticFilesDir(),
         "static"
     ],
-    ignorePaths: [ imagesSrcDir ],
+    ignorePaths: [ docsHelpersPath ],
     renderSingleExtensions: true,
     templateData: {
-        siteStructure: siteStructure
+        siteStructure: siteStructure,
+        messages: messages
     },
     plugins: {
         handlebars: {
             helpers: {
-                rewriteMdLinks: docsCore.helpers.rewriteMdLinks,
-                getGithubLocation: docsCore.helpers.makeGithubLocationHelper(githubDocRoot),
-                getRelativeUrl: docsCore.helpers.getRelativeUrl,
-                ifEqual: docsCore.helpers.ifEqual
+                rewriteMdLinks: docsHelpers.helpers.rewriteMdLinks,
+                getGithubLocation: docsHelpers.helpers.makeGithubLocationHelper(githubDocRoot),
+                getRelativeUrl: docsHelpers.helpers.getRelativeUrl,
+                ifEqual: docsHelpers.helpers.ifEqual,
+                getCategoryNames: docsHelpers.helpers.getCategoryNames
+            },
+            partials: {
+                head: fs.readFileSync(path.join (partialsDir,"head.html.handlebars"), "utf8"),
+                header: fs.readFileSync(path.join (partialsDir,"header.html.handlebars"), "utf8"),
+                sidebar: fs.readFileSync(path.join (partialsDir,"sidebar.html.handlebars"), "utf8"),
+                content: fs.readFileSync(path.join (partialsDir,"content.html.handlebars"), "utf8"),
+                footer: fs.readFileSync(path.join (partialsDir,"footer.html.handlebars"), "utf8"),
+                scripts: fs.readFileSync(path.join (partialsDir,"scripts.html.handlebars"), "utf8"),
+                head404: fs.readFileSync(path.join (partialsDir,"404-head.html.handlebars"), "utf8"),
+                sidebarIcon: fs.readFileSync(path.join ("src","static","images","icons","icon-sidebar.svg"), "utf8")
             }
         },
         highlightjs: {
@@ -57,8 +72,8 @@ module.exports = {
                 nib: true
             },
             stylusOptions: {
-                compress: true,
-                'include css': true
+                compress: false,
+                "include css": true
             }
         },
         uglify: {

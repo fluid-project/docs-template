@@ -1,0 +1,29 @@
+<div class="title-bar small-12 columns" data-responsive-toggle="sidebar" data-hide-for="medium">
+    <button class="docs-template-topics-button" type="button" aria-label="{{document.category}} Topics Menu" data-toggle="sidebar">{{document.category}} Topics</button>
+</div>
+
+<nav class="ignore-for-TOC docs-template-topics top-bar small-12 medium-4 columns" id="sidebar">
+    <div class="top-bar-left">
+        {{#each siteStructure}}
+            {{! Output only the table of contents matching the current document's category }}
+            {{#ifEqual category ../document.category}}
+                <h1 class="show-for-medium">{{category}} {{messages.sidebarHeader foo}}</h1>
+                {{#each sections}}
+                    <h2>{{sectionName}}</h2>
+                    <!-- <ul class=" medium-vertical vertical dropdown menu" data-responsive-menu="accordion medium-dropdown"> -->
+                    <ul class="vertical" data-responsive-menu="accordion">
+                        {{#each pages}}
+                            <li>
+                                {{#ifEqual href ../../../../document.url}}
+                                    <span aria-label="Currently on: {{pageName}}" class="docs-template-topics-active">{{pageName}}</span>
+                                {{else}}
+                                    <a href="{{getRelativeUrl href ../../../../../document.url}}">{{pageName}}</a>
+                                {{/ifEqual}}
+                            </li>
+                        {{/each}}
+                    </ul>
+                {{/each}}
+            {{/ifEqual}}
+        {{/each}}
+    </div>
+</nav>

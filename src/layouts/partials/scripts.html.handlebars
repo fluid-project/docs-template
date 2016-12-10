@@ -1,0 +1,27 @@
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(document).foundation();
+        libPath = "{{{getRelativeUrl '/./' document.url}}}";
+
+        fluid.uiOptions.prefsEditor(".flc-prefsEditor-separatedPanel", {
+            terms: {
+                templatePrefix: libPath + "lib/infusion/src/framework/preferences/html",
+                messagePrefix: libPath + "lib/infusion/src/framework/preferences/messages",
+            },
+            tocTemplate: libPath + "lib/infusion/src/components/tableOfContents/html/TableOfContents.html",
+            ignoreForToC: {
+                "ignore": ".ignore-for-TOC"
+            }
+        });
+
+        $(".docs-template-hideShow-toggle").click( function() {
+            docs.sidebar.hideShow($("body"), $(".docs-template-hideShow-toggle-label"), "{{messages.hideSidebarLabel}}", "{{messages.showSidebarLabel}}" );
+        });
+
+        $(window).on('changed.zf.mediaquery', function(event, newSize, oldSize){
+            docs.sidebar.expandOnResize(newSize, oldSize, $("body"), $(".docs-template-hideShow-toggle-label"));
+        });
+    });
+</script>

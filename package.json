@@ -11,7 +11,17 @@
     "docpad-plugin-highlightjs": "~2.3.0",
     "docpad-plugin-marked": "~2.3.0",
     "docpad-plugin-stylus": "~2.10.0",
-    "docs-core": "fluid-project/docs-core"
+    "infusion": "~2.0.0",
+    "foundation-sites": "~6.2.4",
+    "grunt-jsonlint": "1.0.4",
+    "grunt-contrib-copy": "1.0.0",
+    "grunt-exec": "1.0.0",
+    "urijs": "^1.14.1",
+    "grunt": "1.0.1"
+  },
+  "devDependencies": {
+      "fluid-grunt-eslint": "18.1.2",
+      "eslint-config-fluid": "1.0.0"
   },
   "licenses": [
     {

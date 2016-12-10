@@ -2,20 +2,14 @@
 
 This package includes sample content, styles, and navigation which you can customize to create your own documentation site.
 
-`docs-template` is used in conjunction with:
-* [`docs-core`](https://github.com/fluid-project/docs-core) - supporting libraries like [Fluid Infusion](http://fluidproject.org), [Foundation](http://zurb.foundation.com/), and helper functions.
-* [`docpad`](http://docpad.org) - static HTML platform which helps create a functioning website.
-
-The following are instructions on getting your own site running and customized.
-
 # Get Started Making a New / Custom Site
 
 To create a new, custom site based on `docs-template`, you start from an empty repository for your new project.
 
 1. On your local system, start from the directory for the repository for your new site. Example:
 ```
-git init --bare docs-cookbook
-cd docs-cookbook
+git init --bare my-project
+cd my-project
 ```
 2. Add the `docs-template` as a remote. Example:
 ```
@@ -27,7 +21,7 @@ git fetch docs-template
 git merge docs-template/master
 ```
 Note: If your repository is initialized with a README.md file, you may have to resolve a conflict.
-4. Install DocPad if it isn't already installed:
+4. Install DocPad (if it isn't already installed):
 ```
 sudo npm install -g docpad
 ```
@@ -35,15 +29,19 @@ sudo npm install -g docpad
 ```
 npm install
 ```
-6. Run docpad:
+6. Run Grunt to copy sone dependencies to their proper locations:
+```
+grunt
+```
+7. Run docpad:
 ```
 docpad run
 ```
-7. Confirm everything is set up properly by opening `http://localhost:9778/` in a web browser.
+8. Confirm everything is set up properly by opening `http://localhost:9778/` in a web browser.
 
-8. You can now customize the site.
+9. You can now customize the site.
 
-9. Commit your changes to your new site's repository - not docs-template unless you intend to make changes to docs-template.
+10. Commit your changes to your new site's repository - not `docs-template` unless you intend to make changes to `docs-template`.
 
 # Customizing Your Site
 
@@ -52,10 +50,12 @@ To customize your site, the following files are worth examining:
 ```
 .\docpad.js                    Contains docpad configuration values.
                                The githubDocRoot value should be changed to
-                               match your project.
+                               match the repository of your project.
 
 .\site-structure.json          Defines the sidebar Topics navigation
-                               and the top-bar Category navigation.
+                               and the top-bar Category navigation. navigation
+                               items appear on the website in the same order
+                               defined in this file.
 
 .\src\documents\               Content files go in this directory. By default
                                content files can be written with HTML, markdown,
