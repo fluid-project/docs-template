@@ -1,0 +1,118 @@
+/**
+Category Colour Styling
+
+This file contains configuration for category colours which allows each category
+to have a unique colour scheme. Category colours affect the the header, footer,
+and the sidebar.
+
+Order Matters:
+The order in which the colours are defined should match the order in which
+they appear in the site-structure.json file.
+
+For example:
+
+site-structure.json has categories appearing in the following order:
+* API
+* Tutorials
+* Latest News
+
+Docpad will therefore generate top navigation tabs in the following order:
+1. API
+2. Tutorials
+3. Latest News
+
+When a category is active, a unique classname matching the category name (without
+spaces or punctuation) will appear on the <body> element.
+
+For example, the categories "API", "Tutorials", and "Latest News" will have
+corresponding classnames added to the <body> when active:
+
+* activeCategory-API
+* activeCategory-Tutorials
+* activeCategory-LatestNews
+
+TIP: you can check to see which classname is used by testing the site in a
+browser and inspect the <body> element when a category is active.
+
+Note: If the category name in the site-structure.json file contains multiple
+words separated by spaces or punctuation, they will be removed and the words will
+be merged. Example: a category name "Blog Archive*(2016)" will have classname
+"activeCategory-BlogArchive(2016)".
+*/
+
+/*
+Array of active category classnames and their corresponding colour.
+The order matters - it should be the order in which it appers on the website.
+// start here. Default should not be in this array.
+*/
+categoryColours = {activeCategory-Fruits:   #FFE6C1,
+                   activeCategory-Veggies:  #CFE4FF,
+                   activeCategory-Desserts: #96C786}
+
+
+// The default color to use if no category is active, or if no category colours are defined.
+defaultColor = #FDFFDE;
+
+/* Apply the colours that are related to a particular category.
+theCategory - the active category. */
+applyActiveCategoryColours(theColour) {
+     .docs-template-topics,
+     .title-bar {
+         background-color: theColour;
+     }
+
+     .docs-template-contentArea {
+         border-top: 0.3rem solid darken(theColour,40);
+     }
+
+     .title-bar {
+         border-bottom: 0.3rem solid darken(theColour,40);
+     }
+
+     header, footer {
+         background-color: lighten(theColour,7);
+     }
+}
+
+
+.activeCategory-default {
+    applyActiveCategoryColours(defaultColor);
+}
+
+.activeCategory-Fruits {
+    applyActiveCategoryColours(categoryColours['activeCategory-Fruits']);
+}
+
+.activeCategory-Veggies {
+    applyActiveCategoryColours(categoryColours['activeCategory-Veggies']);
+}
+
+.activeCategory-Desserts {
+    applyActiveCategoryColours(categoryColours['activeCategory-Desserts']);
+}
+
+header nav {
+    /* Colour each navigation item according to the colours in the
+       categoryColours hash. */
+    $i = 0;
+    for category, categoryColour in categoryColours {
+        li:nth-of-type({$i+1}){
+
+            a, span {
+                background-color: categoryColour;
+                border: 0.2rem solid categoryColour;
+            }
+
+            a:hover {
+                background-color: header-footer-hover-background;
+                border-color: header-footer-hover-background;
+            }
+
+            &.docs-template-category-active span {
+                border-color: darken(categoryColour,40);
+                border-bottom: none;
+            }
+        }
+        $i = $i + 1;
+    }
+}

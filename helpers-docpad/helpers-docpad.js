@@ -34,16 +34,15 @@ module.exports.helpers.rewriteMdLinks = function (content) {
 /**
 Helper function to build a URL for "Edit on GitHub" for the current document.
 
-@param {string} githubDocRoot - the URL to the document's github repository.
-@return {string} - the absolute path to the document's location in its github
+@param {string} theDocumentRelativePath - the relative path to the document.
+@param {string} githubDocRoot - the URL to the document's github repository root.
+@return {string} - the absolute URL to the document's location in its github
                    repository.
 */
-module.exports.helpers.makeGithubLocationHelper = function (githubDocRoot) {
-    return function () {
-        // in case we're on Windows, replace "\" in the path with "/"
-        var relativePath = this.document.relativePath.replace(/\\/g, "/");
-        return githubDocRoot + relativePath;
-    };
+module.exports.helpers.makeGithubLocationHelper = function (theDocumentRelativePath, githubDocRoot) {
+    // in case we're on Windows, replace "\" in the path with "/"
+    var relativePath = theDocumentRelativePath.replace(/\\/g, "/");
+    return githubDocRoot + relativePath;
 };
 
 /**

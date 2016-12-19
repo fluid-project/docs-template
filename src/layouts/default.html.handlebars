@@ -3,7 +3,7 @@
     <head>
         {{>head}}
     </head>
-    <body class="{{#each siteStructure}}{{#ifEqual category ../document.category}}activeCategory-{{category}}{{/ifEqual}}{{/each}}">
+    <body class="{{#each siteStructure}}{{#ifEqual category ../document.category}}activeCategory-default activeCategory-{{category}}{{/ifEqual}}{{/each}}">
         <div class="docs-template row">
 
             <!-- Skip Link -->
@@ -22,7 +22,7 @@
                     {{>sidebar}}
 
                     <article id="content" class="columns">
-                        <a class="vertical-center docs-template-hideShow-toggle show-for-medium text-right" href="#">
+                        <a class="vertical-center docs-template-hideShow-toggle show-for-medium text-right" href="#" role="button">
                             <span class="docs-template-hideShow-toggle-icon">{{>sidebarIcon}}</span>
                             <span class="docs-template-hideShow-toggle-label">{{messages.hideSidebarLabel}}</span>
                         </a>

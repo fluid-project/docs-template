@@ -1,10 +1,11 @@
 {
-    "siteName": "The Inclusive Design Guide",
+    "siteName": "Docs Template Example",
     "skipToTopics": "Skip to Topics",
     "skipToContent": "Skip to Content",
     "showSidebarLabel": "Show Topics",
     "hideSidebarLabel": "Hide Topics",
     "sidebarHeader": "%s Topics",
     "editOnGithub": "Edit this Page on GitHub",
-    "footerHtml": "Created by the <a href='http://fluidproject.org/' rel='nofollow' target='_blank'>Fluid Project</a>,<br/>a project of the <a href='http://idrc.ocad.ca/' rel='nofollow' target='_blank'>Inclusive Design Research Centre</a>at <a href='http://www.ocadu.ca/' target='_blank'>OCAD University</a>."
+    "footerHtml": "Created by the <a href='http://fluidproject.org/' rel='nofollow' target='_blank'>Fluid Project</a>,<br/>a project of the <a href='http://idrc.ocad.ca/' rel='nofollow' target='_blank'>Inclusive Design Research Centre</a>at <a href='http://www.ocadu.ca/' target='_blank'>OCAD University</a>.",
+    "githubDocRoot": "https://github.com/fluid-project/docs-template/blob/master/src/documents/"
 }

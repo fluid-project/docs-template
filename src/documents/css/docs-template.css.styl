@@ -1,6 +1,6 @@
-@import docs-template-mixins;
-@import site-config;
-@import nav-config;
+@import 'includes/docs-template-mixins';
+@import 'includes/site-config';
+@import 'includes/category-colours';
 
 html body {
     font-size: 12px;
@@ -158,30 +158,6 @@ header nav {
             color: #000;
         }
     }
-
-    /* Colour each navigation item according to the colours in the
-       categoryColours hash. */
-    $i = 0;
-    for category, categoryColour in categoryColours {
-        li:nth-of-type({$i+1}){
-
-            a, span {
-                background-color: categoryColour;
-                border: 0.2rem solid categoryColour;
-            }
-
-            a:hover {
-                background-color: header-footer-hover-background;
-                border-color: header-footer-hover-background;
-            }
-
-            &.docs-template-category-active span {
-                border-color: darken(categoryColour,40);
-                border-bottom: none;
-            }
-        }
-        $i = $i + 1;
-    }
 }
 
 footer {
@@ -311,7 +287,6 @@ footer {
 // Styles applied when the sidebar is hidden.
 .docs-template-sidebar-hidden {
     .docs-template-topics {
-        // display: none;
         flex-basis: 2%;
         overflow: hidden;
         padding-left: 0;
@@ -512,20 +487,23 @@ footer {
 }
 
 /* Infusion UIO */
+.fl-prefsEditor-separatedPanel {
+    padding: 0;
 
-.fl-prefsEditor-separatedPanel .fl-prefsEditor-showHide {
-    min-width: 7rem;
-}
+    .fl-prefsEditor-showHide, .fl-prefsEditor-reset {
+        font-size: 1.1rem;
+        padding-top: 0.5rem;
+        height: 2rem;
+        margin-bottom: 0.7rem;
+    }
 
-.fl-prefsEditor-separatedPanel .fl-panelBar .fl-prefsEditor-buttons {
-    margin-right: 2rem;
-}
-.fl-prefsEditor-separatedPanel .fl-prefsEditor-showHide,
-.fl-prefsEditor-separatedPanel .fl-prefsEditor-reset {
-    font-size: 1.1rem;
-    padding-top: 0.5rem;
-    height: 2rem;
-    margin-bottom: 0.7rem;
+    .fl-prefsEditor-showHide {
+        min-width: 7rem;
+    }
+
+    .fl-panelBar .fl-prefsEditor-buttons {
+        margin-right: 2rem;
+    }
 }
 
 .docs-template-uio-toc {

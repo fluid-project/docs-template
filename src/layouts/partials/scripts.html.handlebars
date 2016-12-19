@@ -17,11 +17,11 @@
         });
 
         $(".docs-template-hideShow-toggle").click( function() {
-            docs.sidebar.hideShow($("body"), $(".docs-template-hideShow-toggle-label"), "{{messages.hideSidebarLabel}}", "{{messages.showSidebarLabel}}" );
+            docs.sidebar.hideShow($("body"), $(".docs-template-topics"), $(".docs-template-hideShow-toggle-label"), "{{messages.hideSidebarLabel}}", "{{messages.showSidebarLabel}}" );
         });
 
         $(window).on('changed.zf.mediaquery', function(event, newSize, oldSize){
-            docs.sidebar.expandOnResize(newSize, oldSize, $("body"), $(".docs-template-hideShow-toggle-label"));
+            docs.sidebar.expandOnResize(newSize, oldSize, $("body"), $(".docs-template-topics"), $(".docs-template-hideShow-toggle-label"));
         });
     });
 </script>

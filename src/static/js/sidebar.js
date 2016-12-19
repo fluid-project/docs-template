@@ -33,12 +33,14 @@ var docs = docs || {};
     @param {object} theBody - jQuery object for the body element.
     @param {object} theToggleLabel - the element for the hide / show toggle label.
     */
-    docs.sidebar.hideShow = function (theBody, theToggleLabel, theHideText, theShowText) {
+    docs.sidebar.hideShow = function (theBody, theSidebar, theToggleLabel, theHideText, theShowText) {
         theBody.toggleClass("docs-template-sidebar-hidden");
         if (docs.sidebar.isHidden(theBody)) {
             theToggleLabel.html(theShowText);
+            theSidebar.attr('aria-expanded','false');
         } else {
             theToggleLabel.html(theHideText);
+            theSidebar.attr('aria-expanded','true');
         }
     };
 
@@ -46,10 +48,10 @@ var docs = docs || {};
     When resizing from small / mobile to larger, make the sidebar appear by
     default.
     */
-    docs.sidebar.expandOnResize = function (oldSize, newSize, theBody, theToggleLabel) {
+    docs.sidebar.expandOnResize = function (oldSize, newSize, theBody, theSidebar, theToggleLabel) {
         if (oldSize === "small" && newSize !== "small") {
             if (docs.sidebar.isHidden(theBody)) {
-                docs.sidebar.hideShow(theBody, theToggleLabel);
+                docs.sidebar.hideShow(theBody, theSidebar, theToggleLabel);
             }
         }
     };
