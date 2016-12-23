@@ -1,6 +1,8 @@
 # About docs-template
 
-This package includes sample content, styles, and navigation which you can customize to create your own documentation site.
+This project contains all the components needed to create a "static" documentation style website. "static" means that the content just requires a web server, and does not require a database.
+
+`docs-template` includes sample content, styles, and navigation which you can customize to create your own documentation site.
 
 # Get Started Making a New / Custom Site
 
@@ -29,7 +31,7 @@ sudo npm install -g docpad
 ```
 npm install
 ```
-6. Run Grunt to copy sone dependencies to their proper locations:
+6. Run Grunt to copy some dependencies to their proper locations:
 ```
 grunt
 ```
@@ -43,21 +45,19 @@ docpad run
 
 10. Commit your changes to your new site's repository - not `docs-template` unless you intend to make changes to `docs-template`.
 
-# Customizing Your Site
+# Description of Some Important Files and Directories
 
-To customize your site, the following files are worth examining:
+The directory structure follows the organization typically found in DocPad projects. Visit http://docpad.org/docs/begin for more information.
 
 ```
-.\docpad.js                    Contains docpad configuration values.
-                               The githubDocRoot value should be changed to
-                               match the repository of your project.
+./docpad.js                    Contains docpad configuration values.
 
-.\site-structure.json          Defines the sidebar Topics navigation
+./site-structure.json          Defines the sidebar Topics navigation
                                and the top-bar Category navigation. navigation
                                items appear on the website in the same order
                                defined in this file.
 
-.\src\documents\               Content files go in this directory. By default
+./src/documents/               Content files go in this directory. By default
                                content files can be written with HTML, markdown,
                                and handlebars.
 
@@ -65,30 +65,66 @@ To customize your site, the following files are worth examining:
                                category, title, and layout. Category and title
                                map to the site-structure.json file.
 
-.\src\documents\css\           CSS files go in this directory. By default, styles
-                               can be written in CSS or Stylus.
+./src/documents/css/           CSS files written in Stylus or native CSS go in
+                               this directory.                               
 
-                               Customizations can be done by overriding
-                               styles defined in the docs-template.css file.
-                               You can also use Stylus @import to import the CSS
-                               template and then customize as needed.
+./src/static/messages/         Text strings for the website. Customize this for
+                               your site.
 
-.\src\gh-pages\                Files specific to github page deployment go in here.
+./src/gh-pages/                Files specific to github page deployment go in here.
                                Currently this contains the CNAME file.
 
-.\src\layouts\                 Layout templates for content are stored here.
+./src/layouts/                 Layout templates for content are stored here.
                                default.html.handlebars is used for content.
 
-.\src\static\                  Static files such as fonts, images, PDFs and other
+./src/static/                  Static files such as fonts, images, PDFs and other
                                content go in here.
 ```
 
-This structure follows the organization typically found in DocPad projects.
-Also see: http://docpad.org/docs/begin
+# Customizing Your Site
+
+## Customizing Text Strings
+
+To customize the text strings that appear by default on the website, edit the `messages.json` file located in the `./src/static/messages/` directory.  
+
+## Customizing Styling
+
+To customize the layout and styling of the website you should begin with the Stylus files located in the `./src/documents/css/` directory.
+
+The following are styles you would probably want to customize for your website. Rather than modify these files directly, it is suggested you override the styles in different files and include those in your layout.
+
+In particular:
+```
+./src/documents/css/docs-template.css.styl
+    Contains the site styling and pulls in styling from files in the `includes/`
+    directory. Rather than modify this file directly, it is recommended that you
+    override the styles in different files and include those in your layout.
+
+./src/documents/css/includes/category-colours.styl
+    Contains styling for when a category is active. Refer to the
+    `category-colours.styl` file for instructions on how to use this file.
+
+./src/documents/css/includes/site-config.styl
+    Contains all the other colour, focus, and border values used.
+```
+
+## Customizing Favicon, icons, and images
+
+Images, icons, fonts, and the site's favicon can all be found within the `./src/static/` directory.
+
+By default `docs-template` does not come with any site logos. It is expected that you provide your own and modify the template to display it properly.
+
+## Customizing Layout
+
+The site's layout is defined by a series of templates located in the `./layouts/` directory. The templates are written in HTML with handlebars.
+
+The `404-page.html.handlebars` and `default.html.handlebars` are the main templates. Both these templates use the partials located in the `./layouts/partials/` directory.
+
+Customizing the layout of your website will require modifying the main templates and the template partials.
 
 # Getting Updates from docs-template for Your Custom Site
 
-Periodically `docs-template` will have updates. It is suggested you keep up to update with these changes:
+Periodically `docs-template` will have updates. It is up to you to decide whether to merge these changes to your project.
 
 ```
 git fetch docs-template
@@ -103,8 +139,7 @@ Conflicts are expected to occur when merging in changes from `docs-template` to 
 docpad deploy-ghpages --env static
 ```
 
-*Note:* The above command will deploy to the origin of the repository. To deploy
-to production, you may need to be working from Master, not a fork.
+*Note:* The above command will deploy to the origin of the repository. To deploy to production, you may need to be working from Master, not a fork.
 
 # Generating a Static version
 To create a static version of the site, run: `docpad generate --env static`. This will generate a version in the `./out/` directory which you can then view locally or upload to a web server.
