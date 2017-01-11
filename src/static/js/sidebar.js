@@ -9,6 +9,8 @@ You may obtain a copy of the ECL 2.0 License and BSD License at
 https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 */
 
+/*eslint-env node*/
+
 var docs = docs || {};
 
 (function () {
@@ -37,10 +39,10 @@ var docs = docs || {};
         theBody.toggleClass("docs-template-sidebar-hidden");
         if (docs.sidebar.isHidden(theBody)) {
             theToggleLabel.html(theShowText);
-            theSidebar.attr('aria-expanded','false');
+            theSidebar.attr("aria-expanded","false");
         } else {
             theToggleLabel.html(theHideText);
-            theSidebar.attr('aria-expanded','true');
+            theSidebar.attr("aria-expanded","true");
         }
     };
 

@@ -8,6 +8,9 @@ Licenses.
 You may obtain a copy of the ECL 2.0 License and BSD License at
 https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 */
+
+/*eslint-env node*/
+
 "use strict";
 var uri = require("URIjs");
 var path = require("path");

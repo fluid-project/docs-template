@@ -9,6 +9,8 @@ You may obtain a copy of the ECL 2.0 License and BSD License at
 https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 */
 
+/*eslint-env node*/
+
 var path = require ("path");
 var fs = require ("fs");
 var docsHelpers = require ("./helpers-docpad/helpers-docpad.js");
